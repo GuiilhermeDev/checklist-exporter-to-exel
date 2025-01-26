@@ -1,9 +1,8 @@
-
 body {
   display: flex;
-  justify-content: center; 
-  align-items: center; 
-  margin: 0; 
+  justify-content: center;
+  align-items: center;
+  margin: 0;
   background-color: #babae1;
 }
 
@@ -14,6 +13,18 @@ form {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 500px;
+}
+
+.aline-resp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 75px;
+
+}
+
+.aline-resp input {
+  transform: scale(1.5);
 }
 
 h1 {

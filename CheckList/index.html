@@ -28,7 +28,7 @@
 
     <!-- Menu Suspenso -->
     <label for="menu">Selecione uma opção:</label>
-    <select id="menu" name="menu" required>
+    <select id="menu" name="menu">
       <option value="">Selecione uma filial</option>
       <option>Anápolis</option>
       <option>Aparecida de Goiânia</option>
@@ -47,97 +47,115 @@
 
     <div style="border: 1px solid black; padding: 4px; border-radius: 4px; margin-top: 5px;">
       <label for="itens_soltos">1. EQUIPE COM BOA APARENCIA PESSOAL/UNIFORMIZADO/CRACHA? *</label>
-      <input type="radio" id="sim_itens" name="questao1" value="Sim" required>
-      <label for="sim_itens">Sim</label>
-      <input type="radio" id="nao_itens" name="questao1" value="Não" required>
-      <label for="nao_itens">Não</label>
+      <div class="aline-resp">
+        <div>
+          <input type="radio" id="sim_itens" name="1. EQUIPE COM BOA APARENCIA PESSOAL/UNIFORMIZADO/CRACHA? *"
+            value="Sim" required>
+          <label for="sim_itens">Sim</label>
+        </div>
+        <div>
+          <input type="radio" id="nao_itens" name="1. EQUIPE COM BOA APARENCIA PESSOAL/UNIFORMIZADO/CRACHA? *"
+            value="Não" required>
+          <label for="nao_itens">Não</label>
+        </div>
+      </div>
     </div>
 
-    <!-- Outras perguntas... -->
+    <div style="border: 1px solid black; padding: 4px; border-radius: 4px; margin-top: 5px;">
+      <label for="itens_soltos">2. POSSUI KIT: POCHETE, CALCULADORA, CANETA E ETC? *</label>
+      <div class="aline-resp">
+        <div>
+          <input type="radio" id="sim_itens" name="2. POSSUI KIT: POCHETE, CALCULADORA, CANETA E ETC? *"
+            value="Sim" required>
+          <label for="sim_itens">Sim</label>
+        </div>
+        <div>
+          <input type="radio" id="nao_itens" name="2. POSSUI KIT: POCHETE, CALCULADORA, CANETA E ETC? *"
+            value="Não" required>
+          <label for="nao_itens">Não</label>
+        </div>
+      </div>
+    </div>
 
-    <!-- Botões -->
+    <div style="border: 1px solid black; padding: 4px; border-radius: 4px; margin-top: 5px;">
+      <label for="itens_soltos">3. POSSUI TELEFONE CELULAR (COORPORATIVO)? *</label>
+      <div class="aline-resp">
+        <div>
+          <input type="radio" id="sim_itens" name="3. POSSUI TELEFONE CELULAR (COORPORATIVO)? *"
+            value="Sim" required>
+          <label for="sim_itens">Sim</label>
+        </div>
+        <div>
+          <input type="radio" id="nao_itens" name="3. POSSUI TELEFONE CELULAR (COORPORATIVO)? *"
+            value="Não" required>
+          <label for="nao_itens">Não</label>
+        </div>
+      </div>
+    </div>
+
+    <div style="border: 1px solid black; padding: 4px; border-radius: 4px; margin-top: 5px;">
+      <label for="itens_soltos">4. O TACÓGRAFO DO VEICULO ESTA ATIVO OU VENCIDO? *</label>
+      <div class="aline-resp">
+        <div>
+          <input type="radio" id="sim_itens" name="4. O TACÓGRAFO DO VEICULO ESTA ATIVO OU VENCIDO? *"
+            value="Sim" required>
+          <label for="sim_itens">Sim</label>
+        </div>
+        <div>
+          <input type="radio" id="nao_itens" name="4. O TACÓGRAFO DO VEICULO ESTA ATIVO OU VENCIDO? *"
+            value="Não" required>
+          <label for="nao_itens">Não</label>
+        </div>
+      </div>
+    </div>
+
+    <div style="border: 1px solid black; padding: 4px; border-radius: 4px; margin-top: 5px;">
+      <label for="itens_soltos">5. FOI DADO O START NO APLICATIVO CLSI-LOG NA SAIDA DE ROTA? *</label>
+      <div class="aline-resp">
+        <div>
+          <input type="radio" id="sim_itens" name="5. FOI DADO O START NO APLICATIVO CLSI-LOG NA SAIDA DE ROTA? *"
+            value="Sim" required>
+          <label for="sim_itens">Sim</label>
+        </div>
+        <div>
+          <input type="radio" id="nao_itens" name="5. FOI DADO O START NO APLICATIVO CLSI-LOG NA SAIDA DE ROTA? *"
+            value="Não" required>
+          <label for="nao_itens">Não</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão de Exportar -->
     <button type="button" id="exportar">
       <img src="./img/icons8-ms-excel-30.png" alt="Exportar Ícone">
       Exportar para XLSX
-    </button>
-    <button type="button" id="whatsapp" style="display: none;">
-      <img src="./img/icons8-whatsapp-30.png" alt="Compartilhar no WhatsApp">
-      Compartilhar no WhatsApp
     </button>
   </form>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
   <script>
-    document.getElementById('exportar').addEventListener('click', async function () {
+    document.getElementById('exportar').addEventListener('click', function () {
       const form = document.getElementById('meuFormulario');
 
       // Validar o formulário antes de exportar
       if (!form.checkValidity()) {
         alert('Por favor, preencha todos os campos obrigatórios!');
-        form.reportValidity(); // Exibe mensagens nativas do navegador
+        form.reportValidity(); // Mostra as mensagens de erro do navegador
         return;
       }
 
-      // Coletar os dados do formulário
       const formData = new FormData(form);
       const dados = {};
       formData.forEach((value, key) => {
         dados[key] = value;
       });
 
-      // Criar o arquivo XLSX
       const dadosExcel = [dados];
       const worksheet = XLSX.utils.json_to_sheet(dadosExcel);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Dados do Formulário');
-
-      // Gerar o arquivo como Blob
-      const xlsxData = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      const fileBlob = new Blob([xlsxData], {
-        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      });
-      const fileName = 'dados_formulario.xlsx';
-
-      // Mostrar o botão de WhatsApp
-      document.getElementById('whatsapp').style.display = 'block';
-
-      // Funcionalidade de compartilhar no WhatsApp
-      document.getElementById('whatsapp').addEventListener('click', function () {
-        const fileUrl = URL.createObjectURL(fileBlob);
-        const message = 'Confira os dados exportados do acompanhamento de rota!';
-        const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}%0A${encodeURIComponent(fileUrl)}`;
-        window.open(whatsappUrl, '_blank');
-      });
-
-      // Compartilhamento de arquivos (caso o compartilhamento direto não seja possível)
-      try {
-        if (navigator.canShare && navigator.canShare({ files: [new File([fileBlob], fileName)] })) {
-          const file = new File([fileBlob], fileName, { type: fileBlob.type });
-          await navigator.share({
-            files: [file],
-            title: 'Dados do Formulário',
-            text: 'Confira os dados exportados do acompanhamento de rota!',
-          });
-          alert('Arquivo compartilhado com sucesso!');
-        } else {
-          // Fallback para baixar o arquivo se o compartilhamento não for possível
-          const link = document.createElement('a');
-          link.href = URL.createObjectURL(fileBlob);
-          link.download = fileName;
-          link.click();
-          URL.revokeObjectURL(link.href);
-          alert('Compartilhamento não suportado. Arquivo baixado localmente.');
-        }
-      } catch (error) {
-        console.error('Erro ao compartilhar ou baixar arquivo:', error);
-        alert('Ocorreu um erro. O arquivo será baixado.');
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(fileBlob);
-        link.download = fileName;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      }
+      XLSX.writeFile(workbook, 'dados_formulario.xlsx');
     });
   </script>
 
